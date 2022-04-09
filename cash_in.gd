@@ -13,6 +13,8 @@ var reward = 100
 
 var main_node
 
+var hover = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	main_node = get_node("main")
@@ -72,5 +74,9 @@ func check_rule(dice_array):
 			return false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	if(hover == false):
+		$hover.visible = false
+	else:
+		$hover.visible = true
+	pass
