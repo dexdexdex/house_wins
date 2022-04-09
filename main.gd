@@ -72,7 +72,11 @@ func _process(delta):
 		handle_hover()
 		input_ok = false
 		
-	if(!(Input.is_action_pressed("ui_right")) and !(Input.is_action_pressed("ui_left"))):
+	if(Input.is_action_pressed("ui_accept") and input_ok == true):
+		input_ok = false
+		dice_array[dice_position_index].toggle()
+		
+	if(!(Input.is_action_pressed("ui_right")) and !(Input.is_action_pressed("ui_left")) and !(Input.is_action_pressed("ui_accept"))):
 		input_ok = true
 		
 	pass
