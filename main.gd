@@ -13,7 +13,7 @@ var dice_position_index = 0
 var dice_array = []
 
 # if current funds = 0 then it's game over
-var current_funds = 1000
+var current_funds = 10000
 
 # the house will inevitably win! Upkeep increases some amount per turn? Maybe geometrically?
 var upkeep = 5
@@ -97,6 +97,10 @@ func _process(delta):
 		else:
 			# do reroll!
 			reroll_dice()
+			upkeep = upkeep * 1.25
+			current_funds -= upkeep
+			$upkeep_panel/upkeep_text.set_text(str("UPKEEP: $", int(upkeep)))
+			$cash_panel/cash_text.set_text(str("FUNDS: $", int(current_funds)))
 			pass
 		
 	if(!(Input.is_action_pressed("ui_right")) and !(Input.is_action_pressed("ui_left")) and !(Input.is_action_pressed("ui_accept"))):
