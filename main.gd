@@ -12,23 +12,41 @@ export(PackedScene) var cash_in
 var dice_position_index = 0
 var dice_array = []
 
+# if current funds = 0 then it's game over
+var current_funds = 1000
+
+# the house will inevitably win! Upkeep increases some amount per turn? Maybe geometrically?
+var upkeep = 5
+
 # this is our little toggle so that hitting right doesn't +71 dice_position_index within 3 milliseconds
 var input_ok
+
+func reroll_dice():
+	for i in 6:
+		if(dice_array[i].is_held == false):
+			dice_array[i].roll_dice()
 
 func handle_hover():
 
 	for i in 6:
 		dice_array[i].hover = false
 	
-	dice_array[dice_position_index].hover = true
+	# dice position index 7 is reroll
+	if(dice_position_index < 6):
+		dice_array[dice_position_index].hover = true
+		$reroll_button/reroll_text.visible = true
+		$reroll_button/reroll_text_hover.visible = false
 	
+	if(dice_position_index == 6):
+		$reroll_button/reroll_text.visible = false
+		$reroll_button/reroll_text_hover.visible = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
 	for i in 6:
 		var dice_instance = dice.instance()
-		dice_instance.position = Vector2(300+100*i, 300)
+		dice_instance.position = Vector2(100+100*i, 300)
 		dice_array.append(dice_instance)
 		add_child(dice_instance)
 	
@@ -62,7 +80,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
-	if(Input.is_action_pressed("ui_right") and input_ok == true and dice_position_index < 5):
+	if(Input.is_action_pressed("ui_right") and input_ok == true and dice_position_index < 6):
 		dice_position_index += 1
 		handle_hover()
 		input_ok = false
@@ -74,7 +92,12 @@ func _process(delta):
 		
 	if(Input.is_action_pressed("ui_accept") and input_ok == true):
 		input_ok = false
-		dice_array[dice_position_index].toggle()
+		if(dice_position_index < 6):
+			dice_array[dice_position_index].toggle()
+		else:
+			# do reroll!
+			reroll_dice()
+			pass
 		
 	if(!(Input.is_action_pressed("ui_right")) and !(Input.is_action_pressed("ui_left")) and !(Input.is_action_pressed("ui_accept"))):
 		input_ok = true
