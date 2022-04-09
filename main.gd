@@ -12,6 +12,10 @@ export(PackedScene) var cash_in
 var dice_position_index = 0
 var dice_array = []
 
+# cash in index position is where we do hover overing of cash in tiles
+var cash_in_index = 0
+var cash_in_array = []
+
 # if current funds = 0 then it's game over
 var current_funds = 10000
 
@@ -31,12 +35,22 @@ func reroll_dice():
 		if(dice_array[i].is_held == false):
 			dice_array[i].roll_dice()
 
+func handle_cash_in_hover():
+	for i in 4:	
+		cash_in_array[i].hover = false
+	
+	if(cash_in_mode == true):
+		cash_in_array[cash_in_index].hover = true
+		
+	pass
+
 func handle_dice_hover():
 
 	for i in 6:
 		dice_array[i].hover = false
 
 	if(dice_select_mode == true):	
+		print('yup yup in dicey dice')
 		# dice position index 7 is reroll
 		if(dice_position_index < 6):
 			dice_array[dice_position_index].hover = true
@@ -46,6 +60,9 @@ func handle_dice_hover():
 		if(dice_position_index == 6):
 			$reroll_button/reroll_text.visible = false
 			$reroll_button/reroll_text_hover.visible = true
+
+	else:
+		print('nope we are in cash in mode')
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -82,6 +99,13 @@ func _ready():
 	add_child(cash_in_instance_2)
 	add_child(cash_in_instance_3)
 	add_child(cash_in_instance_4)
+	
+	cash_in_array.append(cash_in_instance)
+	cash_in_array.append(cash_in_instance_2)
+	cash_in_array.append(cash_in_instance_3)
+	cash_in_array.append(cash_in_instance_4)
+	
+
 	handle_dice_hover()
 	
 	pass # Replace with function body.
@@ -90,30 +114,41 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 
-	if(Input.is_action_pressed("ui_right") and input_ok == true and dice_position_index < 6):
-		dice_position_index += 1
-		handle_dice_hover()
-		input_ok = false
-	
-	if(Input.is_action_pressed("ui_right") and input_ok == true and dice_position_index < 6):
-		dice_position_index += 1
-		handle_dice_hover()
+	if(Input.is_action_pressed("ui_right") and input_ok == true):
+		if(dice_select_mode == true and dice_position_index < 6):
+			dice_position_index += 1
+			handle_dice_hover()
+		elif(cash_in_mode == true and cash_in_index < 3):
+			cash_in_index += 1
+			handle_cash_in_hover()
+		
 		input_ok = false
 
-	if(Input.is_action_pressed("ui_left") and input_ok == true and dice_position_index > 0):
-		dice_position_index -= 1
-		handle_dice_hover()
+	if(Input.is_action_pressed("ui_left") and input_ok == true):
+		if(dice_select_mode == true and dice_position_index > 0):
+			dice_position_index -= 1
+			handle_dice_hover()
+		elif(cash_in_mode == true and cash_in_index > 0):
+			cash_in_index -= 1
+			handle_cash_in_hover()
+		
 		input_ok = false
 
 	if(Input.is_action_pressed("ui_up") and input_ok == true):
 		cash_in_mode = true
 		dice_select_mode = false
+		handle_dice_hover()
+		handle_cash_in_hover()
 		
 		input_ok = false
 
 	if(Input.is_action_pressed("ui_down") and input_ok == true):
 		cash_in_mode = false
 		dice_select_mode = true
+		dice_position_index = 0
+		handle_dice_hover()
+		handle_cash_in_hover()
+		
 		
 		input_ok = false
 
