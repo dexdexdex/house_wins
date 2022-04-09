@@ -43,14 +43,17 @@ func toggle():
 
 	if(is_held == true):
 		$selected.visible = true
+		$HoldLabel.visible = true
 	else:
 		$selected.visible = false
+		$HoldLabel.visible = false
 
 func _ready():
 	rng.randomize()
 	roll_dice()
 	$selected.visible = false
 	$hover.visible = false
+	$HoldLabel.visible = false
 	pass # Replace with function body.
 
 
