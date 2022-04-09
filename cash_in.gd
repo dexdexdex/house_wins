@@ -8,8 +8,14 @@ extends Node2D
 var rule_label_text
 var rule_text
 
+# default reward I guess?
+var reward = 100
+
+var main_node
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	main_node = get_node("main")
 	pass # Replace with function body.
 
 func set_rule(rule_string):
@@ -24,6 +30,7 @@ func check_rule(dice_array):
 			dice_array[3] == 6 &&
 			dice_array[4] == 6 &&
 			dice_array[5] == 6):
+				main_node.current_funds += reward				
 				return true
 		else:
 			return false
@@ -35,6 +42,7 @@ func check_rule(dice_array):
 			dice_array[3] == 5 &&
 			dice_array[4] == 5 &&
 			dice_array[5] == 5):
+				main_node.current_funds += reward
 				return true
 		else:
 			return false
@@ -46,6 +54,7 @@ func check_rule(dice_array):
 			dice_array[3] == 4 &&
 			dice_array[4] == 4 &&
 			dice_array[5] == 4):
+				main_node.current_funds += reward
 				return true
 		else:
 			return false
@@ -57,6 +66,7 @@ func check_rule(dice_array):
 			dice_array[3] == 3 &&
 			dice_array[4] == 3 &&
 			dice_array[5] == 3):
+				main_node.current_funds += reward
 				return true
 		else:
 			return false
