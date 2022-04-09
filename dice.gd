@@ -16,6 +16,24 @@ var hover = false
 func roll_dice():
 	dice_value = rng.randi_range(1,6)
 	$dice_label.set_text(str(dice_value))
+	$One.visible = false
+	$Two.visible = false
+	$Three.visible = false
+	$Four.visible = false
+	$Five.visible = false
+	$Six.visible = false
+	if dice_value == 1:
+		$One.visible = true
+	elif dice_value == 2:
+		$Two.visible = true
+	elif dice_value == 3:
+		$Three.visible = true
+	elif dice_value == 4:
+		$Four.visible = true
+	elif dice_value == 5:
+		$Five.visible = true
+	elif dice_value == 6:
+		$Six.visible = true
 
 func toggle():
 	if(is_held == true):
