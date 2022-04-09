@@ -7,6 +7,7 @@ extends Node2D
 
 var rule_label_text
 var rule_text
+var rule_text_formatted
 
 # default reward I guess?
 var reward = 100
@@ -21,7 +22,20 @@ func _ready():
 	pass # Replace with function body.
 
 func set_rule(rule_string):
-	$rule_label.set_text(str(rule_string))
+	
+	if(rule_string == "ALL_SIXES"):
+		rule_text_formatted = "ALL 6s"
+		
+	if(rule_string == "ALL_FIVES"):
+		rule_text_formatted = "ALL 5s"
+
+	if(rule_string == "ALL_FOURS"):
+		rule_text_formatted = "ALL 4s"
+
+	if(rule_string == "ALL_THREES"):
+		rule_text_formatted = "ALL 3s"
+		
+	$cash_in_panel/rule_label.set_text(str(rule_text_formatted))
 	rule_text = rule_string
 
 func check_rule(dice_array):
@@ -76,7 +90,7 @@ func check_rule(dice_array):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if(hover == false):
-		$hover.visible = false
+		$cash_in_panel/hover.visible = false
 	else:
-		$hover.visible = true
+		$cash_in_panel/hover.visible = true
 	pass

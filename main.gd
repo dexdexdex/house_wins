@@ -81,17 +81,17 @@ func _ready():
 	
 	var cash_in_instance_2 = cash_in.instance()
 	cash_in_instance_2.set_rule("ALL_FIVES")
-	cash_in_instance_2.position = Vector2(200, 50)
+	cash_in_instance_2.position = Vector2(250, 50)
 	cash_in_instance_2.reward = rng.randi_range(400, 600)
 	
 	var cash_in_instance_3 = cash_in.instance()
 	cash_in_instance_3.set_rule("ALL_FOURS")
-	cash_in_instance_3.position = Vector2(300, 50)
+	cash_in_instance_3.position = Vector2(400, 50)
 	cash_in_instance_3.reward = rng.randi_range(400, 600)
 	
 	var cash_in_instance_4 = cash_in.instance()
 	cash_in_instance_4.set_rule("ALL_THREES")	
-	cash_in_instance_4.position = Vector2(400, 50)
+	cash_in_instance_4.position = Vector2(550, 50)
 	cash_in_instance_4.reward = rng.randi_range(400, 600)
 	
 	
