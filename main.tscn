@@ -59,6 +59,23 @@ text = "FUNDS: $10000"
 align = 1
 valign = 1
 
+[node name="global_multiplier" type="Panel" parent="."]
+margin_left = 42.0
+margin_top = 463.0
+margin_right = 278.0
+margin_bottom = 508.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="multiplier_text" type="Label" parent="global_multiplier"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 1 )
+text = "%"
+align = 1
+valign = 1
+
 [node name="upkeep_panel" type="Panel" parent="."]
 margin_left = 686.0
 margin_top = 525.0

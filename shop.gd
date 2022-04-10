@@ -40,7 +40,8 @@ func generate_options():
 	if(option_object.type == "delay_inevitable"):
 		$shop_panel/option_1_label.set_text(str("Upkeep -", option_object.amount, '%'))
 
-	$shop_panel/option_1_label.set_text(str(option_object.cost))
+	$shop_panel/option_1_costs.set_text(str(option_object.cost))
+	option_1_object = option_object
 
 	###############
 
@@ -52,8 +53,8 @@ func generate_options():
 	if(option_object.type == "delay_inevitable"):
 		$shop_panel/option_2_label.set_text(str("Upkeep -", option_object.amount, '%'))
 
-	$shop_panel/option_2_label.set_text(str(option_object.cost))
-
+	$shop_panel/option_2_costs.set_text(str(option_object.cost))
+	option_2_object = option_object
 
 	#####################
 	option_object = generate_reward()
@@ -64,8 +65,8 @@ func generate_options():
 	if(option_object.type == "delay_inevitable"):
 		$shop_panel/option_3_label.set_text(str("Upkeep -", option_object.amount, '%'))
 
-	$shop_panel/option_3_label.set_text(str(option_object.cost))
-
+	$shop_panel/option_3_costs.set_text(str(option_object.cost))
+	option_3_object = option_object
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -125,21 +126,15 @@ func handle_shop_purchase():
 	main_node.current_funds -= selected_option.cost
 
 	if(selected_option.type == "buff_global"):
-		main_node.global_multiplier += float(selected_option.amount / 100)
+		main_node.global_multiplier += float(selected_option.amount / 100.0)
 		
 	if(selected_option.type == "buff_single"):
 		var selected_cash_in_upgrade = rng.randi_range(0,3)
-		if(selected_cash_in_upgrade == 0):
-			main_node.cash_in_instance.set_reward(main_node.cash_in_instance.reward * (1.00 + selected_option.amount))
-		if(selected_cash_in_upgrade == 1):
-			main_node.cash_in_instance_2.set_reward(main_node.cash_in_instance_2.reward * (1.00 + selected_option.amount))			
-		if(selected_cash_in_upgrade == 2):
-			main_node.cash_in_instance_3.set_reward(main_node.cash_in_instance_3.reward * (1.00 + selected_option.amount))
-		if(selected_cash_in_upgrade == 3):
-			main_node.cash_in_instance_4.set_reward(main_node.cash_in_instance_4.reward * (1.00 + selected_option.amount))
+		main_node.cash_in_array[selected_cash_in_upgrade].set_reward(int(main_node.cash_in_array[selected_cash_in_upgrade].reward * (1.00 + float(selected_option.amount) / 100.0)))
+
 			
 	if(selected_option.type == "delay_inevitable"):
-		main_node.upkeep *= (1.0 - float(selected_option.amount / 100))
+		main_node.upkeep *= (1.0 - float(selected_option.amount / 100.0))
 
 
 func _process(delta):
@@ -161,7 +156,6 @@ func _process(delta):
 	if(Input.is_action_pressed("ui_accept") and input_ok == true and can_select_shop == true):
 		main_node.in_shop = false
 		can_select_shop = false
-		print('selected ', shop_index, ' for purchase!')
 		self.visible = false
 		handle_shop_purchase()
 		input_ok = false

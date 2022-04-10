@@ -132,6 +132,8 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 
+	$global_multiplier/multiplier_text.set_text(str("GLOBAL: ", int(global_multiplier*100), "%"))
+
 	# if shop is active we need to handle all the shop inputs instead of the inputs here
 	if(in_shop == false):
 		if(Input.is_action_pressed("ui_right") and input_ok == true):
@@ -203,7 +205,7 @@ func _process(delta):
 			if cash_in_mode:
 				# If matches constraint
 				if cash_in_array[cash_in_index].check_rule(dice_array):
-					current_funds += cash_in_array[cash_in_index].reward
+					current_funds += cash_in_array[cash_in_index].reward * global_multiplier
 					
 					for i in 6:
 						if(dice_array[i].is_held == true):
