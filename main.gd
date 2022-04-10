@@ -216,6 +216,8 @@ func _process(delta):
 				current_funds -= upkeep
 				if current_funds < 0:
 					game_over = true
+					$ost.stop()
+					$game_over.play()
 					var scene = game_over_scene.instance()
 					add_child(scene)
 					scene.set_text(turn_count, max_funds)

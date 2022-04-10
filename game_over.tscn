@@ -47,3 +47,13 @@ text = "You should hae quit while you had X"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="try_again" type="Label" parent="."]
+margin_left = 288.0
+margin_top = 387.0
+margin_right = 518.0
+margin_bottom = 401.0
+text = "Press Any Key To Try Again!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
