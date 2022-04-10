@@ -7,6 +7,7 @@ extends Node2D
 
 export(PackedScene) var dice
 export(PackedScene) var cash_in
+export(PackedScene) var game_over_scene
 
 # dice position index is current position of your cursor, goes from 1-6
 var dice_position_index = 0
@@ -27,6 +28,10 @@ var input_ok
 
 var dice_select_mode = true
 var cash_in_mode = false
+
+var turn_count = 0
+var max_funds = current_funds
+var game_over = false
 
 
 
@@ -161,6 +166,8 @@ func _process(delta):
 
 		
 	if(Input.is_action_pressed("ui_accept") and input_ok == true):
+		if game_over:
+			get_tree().reload_current_scene()
 		input_ok = false
 		if cash_in_mode:
 			# If matches constraint
@@ -180,8 +187,16 @@ func _process(delta):
 		else:
 			# do reroll!
 			reroll_dice()
-			upkeep = upkeep * 1.25
+			turn_count += 1
+			if current_funds > max_funds:
+				max_funds = current_funds
 			current_funds -= upkeep
+			if current_funds < 0:
+				game_over = true
+				var scene = game_over_scene.instance()
+				add_child(scene)
+				scene.set_text(turn_count, max_funds)
+			upkeep = stepify(upkeep * 1.25, 1)
 			$upkeep_panel/upkeep_text.set_text(str("UPKEEP: $", int(upkeep)))
 			$cash_panel/cash_text.set_text(str("FUNDS: $", int(current_funds)))
 			pass

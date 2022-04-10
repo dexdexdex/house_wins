@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
 [ext_resource path="res://dice.tscn" type="PackedScene" id=2]
 [ext_resource path="res://cash_in.tscn" type="PackedScene" id=3]
 [ext_resource path="res://pirulen.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://game_over.tscn" type="PackedScene" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 4 )
@@ -12,6 +13,7 @@ font_data = ExtResource( 4 )
 script = ExtResource( 1 )
 dice = ExtResource( 2 )
 cash_in = ExtResource( 3 )
+game_over_scene = ExtResource( 5 )
 
 [node name="reroll_button" type="Panel" parent="."]
 margin_left = 727.0
