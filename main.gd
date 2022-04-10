@@ -232,6 +232,7 @@ func _process(delta):
 							dice_array[i].toggle()
 					reroll_dice()
 					$cash_panel/cash_text.set_text(str("FUNDS: $", int(current_funds)))
+					cash_in_array[cash_in_index].change_rule()
 				return
 				
 			

@@ -14,9 +14,29 @@ var main_node
 
 var hover = false
 
+var rule_array = []
+var rng = RandomNumberGenerator.new()
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	rng.randomize()
 	main_node = get_node("main")
+	
+	rule_array.append({"rule_text": "ALL_SIXES", "rule_string": "All Sixes"})
+	rule_array.append({"rule_text": "ALL_FIVES", "rule_string": "All Fives"})	
+	rule_array.append({"rule_text": "ALL_FOURS", "rule_string": "All Fours"})	
+	rule_array.append({"rule_text": "ALL_THREES", "rule_string": "All Threes"})	
+	rule_array.append({"rule_text": "ALL_TWOS", "rule_string": "All Twos"})	
+	rule_array.append({"rule_text": "ALL_ONES", "rule_string": "All Ones"})	
+	rule_array.append({"rule_text": "ALL_EVENS", "rule_string": "All Evens"})	
+	rule_array.append({"rule_text": "ALL_ODDS", "rule_string": "All Odds"})	
+	rule_array.append({"rule_text": "THREE+_ODDS", "rule_string": "3+ Odds"})	
+	rule_array.append({"rule_text": "FOUR+_ODDS", "rule_string": "4+ Odds"})	
+	rule_array.append({"rule_text": "FIVE+_ODDS", "rule_string": "5+ Odds"})	
+	rule_array.append({"rule_text": "THREE+_EVENS", "rule_string": "3+ Evens"})		
+	rule_array.append({"rule_text": "FOUR+_EVENS", "rule_string": "4+ Evens"})	
+	rule_array.append({"rule_text": "FIVE+_EVENS", "rule_string": "5+ Evens"})	
+	
 	pass # Replace with function body.
 
 func set_rule(rule_string):
@@ -29,6 +49,13 @@ func set_label(rule_label_text):
 func set_reward(new_reward):
 	reward = new_reward
 	$reward_label.set_text(str(new_reward))
+
+func change_rule():
+	var rule_index = rng.randi_range(0, rule_array.size() - 1)
+	set_rule(rule_array[rule_index].rule_text)
+	set_label(rule_array[rule_index].rule_string)
+	
+	pass
 
 func check_rule(dice_array):
 	if(rule_text == "ALL_SIXES"):
