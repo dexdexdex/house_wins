@@ -162,14 +162,14 @@ func _process(delta):
 		if(shop_index < 3):
 			shop_index += 1
 			handle_hover_highlight()
-		
+		$ui_move.play()
 		input_ok = false
 
 	if(Input.is_action_pressed("ui_left") and input_ok == true):
 		if(shop_index > 0):
 			shop_index -= 1
 			handle_hover_highlight()
-		
+		$ui_move.play()
 		input_ok = false
 
 	if(Input.is_action_pressed("ui_accept") and input_ok == true and can_select_shop == true):
@@ -177,6 +177,7 @@ func _process(delta):
 		can_select_shop = false
 		self.visible = false
 		handle_shop_purchase()
+		$ui_powerup.play()
 		input_ok = false
 
 	if(!(Input.is_action_pressed("ui_right")) and !(Input.is_action_pressed("ui_left")) and !(Input.is_action_pressed("ui_accept"))):
