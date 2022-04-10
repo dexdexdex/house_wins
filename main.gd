@@ -76,8 +76,6 @@ func handle_dice_hover():
 			$reroll_button/reroll_text.visible = false
 			$reroll_button/reroll_text_hover.visible = true
 
-	else:
-		print('nope we are in cash in mode')
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -97,20 +95,26 @@ func _ready():
 	cash_in_instance.set_reward(rng.randi_range(400, 600))
 	
 	var cash_in_instance_2 = cash_in.instance()
-	cash_in_instance_2.set_rule("ALL_FIVES")
-	cash_in_instance_2.set_label("All fives")
+	#cash_in_instance_2.set_rule("ALL_FIVES")
+	#cash_in_instance_2.set_label("All fives")
+	
+	cash_in_instance_2.set_rule("ALL_ODDS")
+	cash_in_instance_2.set_label("All Odds")	
 	cash_in_instance_2.position = Vector2(200, 50)
 	cash_in_instance_2.set_reward(rng.randi_range(400, 600))
 	
 	var cash_in_instance_3 = cash_in.instance()
-	cash_in_instance_3.set_rule("ALL_FOURS")
-	cash_in_instance_3.set_label("All fours")
+	#cash_in_instance_3.set_rule("ALL_FOURS")
+	#cash_in_instance_3.set_label("All fours")
+	
+	cash_in_instance_3.set_rule("ALL_EVENS")
+	cash_in_instance_3.set_label("All Evens")	
 	cash_in_instance_3.position = Vector2(300, 50)
 	cash_in_instance_3.set_reward(rng.randi_range(400, 600))
 	
 	var cash_in_instance_4 = cash_in.instance()
-	cash_in_instance_4.set_rule("ALL_THREES")	
-	cash_in_instance_4.set_label("All threes")
+	cash_in_instance_4.set_rule("THREE+_ODDS")	
+	cash_in_instance_4.set_label("3+ Odds")
 	cash_in_instance_4.position = Vector2(400, 50)
 	cash_in_instance_4.set_reward(rng.randi_range(400, 600))
 	

@@ -97,6 +97,89 @@ func check_rule(dice_array):
 		else:
 			return false
 
+	if(rule_text == "ALL_EVENS"):
+		for i in dice_array:
+			if i.dice_value % 2 == 1:
+				return false
+		
+		return true
+
+	if(rule_text == "ALL_ODDS"):
+		for i in dice_array:
+			if i.dice_value % 2 == 0:
+				return false
+		
+		return true
+
+	if(rule_text == "THREE+_ODDS"):
+		var odd_count = 0
+		for i in dice_array:
+			if i.dice_value % 2 == 1:
+				odd_count += 1
+		
+		if(odd_count >= 3):
+			return true
+		else:
+			return false
+
+
+	if(rule_text == "FOUR+_ODDS"):
+		var odd_count = 0
+		for i in dice_array:
+			if i.dice_value % 2 == 1:
+				odd_count += 1
+		
+		if(odd_count >= 4):
+			return true
+		else:
+			return false
+
+
+	if(rule_text == "FIVE+_ODDS"):
+		var odd_count = 0
+		for i in dice_array:
+			if i.dice_value % 2 == 1:
+				odd_count += 1
+		
+		if(odd_count >= 5):
+			return true
+		else:
+			return false
+
+
+	if(rule_text == "THREE+_EVENS"):
+		var even_count = 0
+		for i in dice_array:
+			if i.dice_value % 2 == 0:
+				even_count += 1
+		
+		if(even_count >= 3):
+			return true
+		else:
+			return false
+
+	if(rule_text == "FOUR+_EVENS"):
+		var even_count = 0
+		for i in dice_array:
+			if i.dice_value % 2 == 0:
+				even_count += 1
+		
+		if(even_count >= 4):
+			return true
+		else:
+			return false
+
+	if(rule_text == "FIVE+_EVENS"):
+		var even_count = 0
+		for i in dice_array:
+			if i.dice_value % 2 == 0:
+				even_count += 1
+		
+		if(even_count >= 5):
+			return true
+		else:
+			return false
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if(hover == false):
