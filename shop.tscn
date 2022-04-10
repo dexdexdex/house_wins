@@ -15,7 +15,6 @@ size = 22
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=4]
-size = 22
 font_data = ExtResource( 2 )
 
 [node name="shop" type="Node2D"]
@@ -118,7 +117,6 @@ text = "BUFF 1"
 align = 1
 valign = 1
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -134,7 +132,6 @@ text = "BUFF 2"
 align = 1
 valign = 1
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -150,7 +147,6 @@ text = "BUFF 3"
 align = 1
 valign = 1
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -166,7 +162,6 @@ text = "$300"
 align = 1
 valign = 1
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -182,7 +177,6 @@ text = "$400"
 align = 1
 valign = 1
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -198,7 +192,6 @@ text = "-$500"
 align = 1
 valign = 1
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 

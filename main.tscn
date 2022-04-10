@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
 [ext_resource path="res://dice.tscn" type="PackedScene" id=2]
@@ -7,6 +7,9 @@
 [ext_resource path="res://game_over.tscn" type="PackedScene" id=5]
 [ext_resource path="res://shop.tscn" type="PackedScene" id=6]
 [ext_resource path="res://dice_roll.wav" type="AudioStream" id=7]
+[ext_resource path="res://Hit 1.wav" type="AudioStream" id=8]
+[ext_resource path="res://Action Misc 10.wav" type="AudioStream" id=9]
+[ext_resource path="res://Hit 4.wav" type="AudioStream" id=10]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 4 )
@@ -138,3 +141,12 @@ __meta__ = {
 
 [node name="dice_roll" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
+
+[node name="ui_move" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+
+[node name="ui_error" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+
+[node name="ui_toggle" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
