@@ -46,6 +46,7 @@ var in_shop = false
 var shop_instance
 
 func reroll_dice():
+	$dice_roll.play()
 	for i in 6:
 		if(dice_array[i].is_held == false):
 			dice_array[i].roll_dice()
