@@ -114,3 +114,23 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="turn_counter" type="Panel" parent="."]
+margin_left = 686.0
+margin_top = 37.0
+margin_right = 922.0
+margin_bottom = 82.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="turn_label" type="Label" parent="turn_counter"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 1 )
+text = "TURN 1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

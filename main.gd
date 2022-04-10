@@ -30,7 +30,7 @@ var input_ok
 var dice_select_mode = true
 var cash_in_mode = false
 
-var turn_count = 0
+var turn_count = 1
 var max_funds = current_funds
 var game_over = false
 
@@ -142,6 +142,7 @@ func _ready():
 func _process(delta):
 
 	$global_multiplier/multiplier_text.set_text(str("GLOBAL: ", int(global_multiplier*100), "%"))
+	$turn_counter/turn_label.set_text(str("TURN ", turn_count))
 
 	# if shop is active we need to handle all the shop inputs instead of the inputs here
 	if(in_shop == false):
