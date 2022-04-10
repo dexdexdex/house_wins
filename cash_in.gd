@@ -1,6 +1,5 @@
 extends Node2D
 
-
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -26,49 +25,45 @@ func set_rule(rule_string):
 
 func check_rule(dice_array):
 	if(rule_text == "ALL_SIXES"):
-		if(dice_array[0] == 6 &&
-			dice_array[1] == 6 &&
-			dice_array[2] == 6 &&
-			dice_array[3] == 6 &&
-			dice_array[4] == 6 &&
-			dice_array[5] == 6):
-				main_node.current_funds += reward				
+		if(dice_array[0].dice_value == 6 &&
+			dice_array[1].dice_value == 6 &&
+			dice_array[2].dice_value == 6 &&
+			dice_array[3].dice_value == 6 &&
+			dice_array[4].dice_value == 6 &&
+			dice_array[5].dice_value == 6):			
 				return true
 		else:
 			return false
 
 	if(rule_text == "ALL_FIVES"):
-		if(dice_array[0] == 5 &&
-			dice_array[1] == 5 &&
-			dice_array[2] == 5 &&
-			dice_array[3] == 5 &&
-			dice_array[4] == 5 &&
-			dice_array[5] == 5):
-				main_node.current_funds += reward
+		if(dice_array[0].dice_value == 5 &&
+			dice_array[1].dice_value == 5 &&
+			dice_array[2].dice_value == 5 &&
+			dice_array[3].dice_value == 5 &&
+			dice_array[4].dice_value == 5 &&
+			dice_array[5].dice_value == 5):
 				return true
 		else:
 			return false
 
 	if(rule_text == "ALL_FOURS"):
-		if(dice_array[0] == 4 &&
-			dice_array[1] == 4 &&
-			dice_array[2] == 4 &&
-			dice_array[3] == 4 &&
-			dice_array[4] == 4 &&
-			dice_array[5] == 4):
-				main_node.current_funds += reward
+		if(dice_array[0].dice_value == 4 &&
+			dice_array[1].dice_value == 4 &&
+			dice_array[2].dice_value == 4 &&
+			dice_array[3].dice_value == 4 &&
+			dice_array[4].dice_value == 4 &&
+			dice_array[5].dice_value == 4):
 				return true
 		else:
 			return false
 
 	if(rule_text == "ALL_THREES"):
-		if(dice_array[0] == 3 &&
-			dice_array[1] == 3 &&
-			dice_array[2] == 3 &&
-			dice_array[3] == 3 &&
-			dice_array[4] == 3 &&
-			dice_array[5] == 3):
-				main_node.current_funds += reward
+		if(dice_array[0].dice_value == 3 &&
+			dice_array[1].dice_value == 3 &&
+			dice_array[2].dice_value == 3 &&
+			dice_array[3].dice_value == 3 &&
+			dice_array[4].dice_value == 3 &&
+			dice_array[5].dice_value == 3):
 				return true
 		else:
 			return false
@@ -80,3 +75,4 @@ func _process(delta):
 	else:
 		$hover.visible = true
 	pass
+

@@ -28,6 +28,8 @@ var input_ok
 var dice_select_mode = true
 var cash_in_mode = false
 
+
+
 var rng = RandomNumberGenerator.new()
 
 func reroll_dice():
@@ -69,6 +71,7 @@ func _ready():
 	
 	for i in 6:
 		var dice_instance = dice.instance()
+		dice_instance.dice_value = i + 1
 		dice_instance.position = Vector2(100+100*i, 300)
 		dice_array.append(dice_instance)
 		add_child(dice_instance)
@@ -155,6 +158,19 @@ func _process(delta):
 		
 	if(Input.is_action_pressed("ui_accept") and input_ok == true):
 		input_ok = false
+		if cash_in_mode:
+			# If matches constraint
+			if cash_in_array[cash_in_index].check_rule(dice_array):
+				current_funds += cash_in_array[cash_in_index].reward
+				
+				for i in 6:
+					if(dice_array[i].is_held == true):
+						dice_array[i].toggle()
+				reroll_dice()
+				$cash_panel/cash_text.set_text(str("FUNDS: $", int(current_funds)))
+			return
+			
+			
 		if(dice_position_index < 6):
 			dice_array[dice_position_index].toggle()
 		else:
