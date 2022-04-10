@@ -1,19 +1,20 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://shop.gd" type="Script" id=1]
 [ext_resource path="res://pirulen.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://buff.tscn" type="PackedScene" id=3]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.219608, 0.211765, 0.211765, 1 )
 
 [sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.141176, 0.415686, 0.843137, 1 )
+bg_color = Color( 0.0588235, 0.219608, 0.0588235, 1 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=5]
 size = 22
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=4]
 font_data = ExtResource( 2 )
 
 [node name="shop" type="Node2D"]
@@ -60,10 +61,10 @@ __meta__ = {
 }
 
 [node name="option_1_selected" type="Panel" parent="shop_panel"]
-margin_left = 57.0
-margin_top = 135.0
-margin_right = 289.0
-margin_bottom = 296.0
+margin_left = 56.0
+margin_top = 363.0
+margin_right = 288.0
+margin_bottom = 379.0
 custom_styles/panel = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -71,9 +72,9 @@ __meta__ = {
 
 [node name="option_2_selected" type="Panel" parent="shop_panel"]
 margin_left = 329.0
-margin_top = 135.0
+margin_top = 363.0
 margin_right = 561.0
-margin_bottom = 296.0
+margin_bottom = 379.0
 custom_styles/panel = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -81,9 +82,9 @@ __meta__ = {
 
 [node name="option_3_selected" type="Panel" parent="shop_panel"]
 margin_left = 600.0
-margin_top = 135.0
+margin_top = 363.0
 margin_right = 832.0
-margin_bottom = 296.0
+margin_bottom = 379.0
 custom_styles/panel = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -96,7 +97,7 @@ margin_left = 269.0
 margin_top = 35.0
 margin_right = -251.0
 margin_bottom = -318.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 text = "WELCOME TO THE SHOP"
 align = 1
 valign = 1
@@ -111,11 +112,12 @@ margin_left = 58.0
 margin_top = 287.0
 margin_right = -603.0
 margin_bottom = -66.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "BUFF 1"
 align = 1
 valign = 1
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -126,11 +128,12 @@ margin_left = 328.0
 margin_top = 287.0
 margin_right = -333.0
 margin_bottom = -66.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "BUFF 2"
 align = 1
 valign = 1
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -141,11 +144,12 @@ margin_left = 598.0
 margin_top = 287.0
 margin_right = -63.0
 margin_bottom = -66.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "BUFF 3"
 align = 1
 valign = 1
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -156,11 +160,12 @@ margin_left = 58.0
 margin_top = 320.0
 margin_right = -603.0
 margin_bottom = -33.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "$300"
 align = 1
 valign = 1
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -171,11 +176,12 @@ margin_left = 328.0
 margin_top = 320.0
 margin_right = -333.0
 margin_bottom = -33.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "$400"
 align = 1
 valign = 1
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -186,13 +192,23 @@ margin_left = 598.0
 margin_top = 320.0
 margin_right = -63.0
 margin_bottom = -33.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "-$500"
 align = 1
 valign = 1
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
+
+[node name="buff" parent="shop_panel" instance=ExtResource( 3 )]
+position = Vector2( 174, 219 )
+
+[node name="buff2" parent="shop_panel" instance=ExtResource( 3 )]
+position = Vector2( 446, 219 )
+
+[node name="buff3" parent="shop_panel" instance=ExtResource( 3 )]
+position = Vector2( 710, 219 )
 
 [node name="ready_timer" type="Timer" parent="."]
 wait_time = 0.3

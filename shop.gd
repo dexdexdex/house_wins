@@ -35,10 +35,13 @@ func generate_options():
 	# i think there's some weird $ variable notation you could do but for now we are doing it manually
 	if(option_object.type == "buff_global"):
 		$shop_panel/option_1_label.set_text(str("Global Gold  +", option_object.amount, '%'))
+		$shop_panel/buff.set_type(option_object.type)
 	if(option_object.type == "buff_single"):
 		$shop_panel/option_1_label.set_text(str("Improve Reward +", option_object.amount, '%'))
+		$shop_panel/buff.set_type(option_object.type)
 	if(option_object.type == "delay_inevitable"):
 		$shop_panel/option_1_label.set_text(str("Upkeep -", option_object.amount, '%'))
+		$shop_panel/buff.set_type(option_object.type)
 
 	$shop_panel/option_1_costs.set_text(str(option_object.cost))
 	option_1_object = option_object
@@ -48,10 +51,13 @@ func generate_options():
 	option_object = generate_reward()
 	if(option_object.type == "buff_global"):
 		$shop_panel/option_2_label.set_text(str("Global Gold  +", option_object.amount, '%'))
+		$shop_panel/buff2.set_type(option_object.type)
 	if(option_object.type == "buff_single"):
 		$shop_panel/option_2_label.set_text(str("Improve Reward +", option_object.amount, '%'))
+		$shop_panel/buff2.set_type(option_object.type)
 	if(option_object.type == "delay_inevitable"):
 		$shop_panel/option_2_label.set_text(str("Upkeep -", option_object.amount, '%'))
+		$shop_panel/buff2.set_type(option_object.type)
 
 	$shop_panel/option_2_costs.set_text(str(option_object.cost))
 	option_2_object = option_object
@@ -60,10 +66,13 @@ func generate_options():
 	option_object = generate_reward()
 	if(option_object.type == "buff_global"):
 		$shop_panel/option_3_label.set_text(str("Global Gold  +", option_object.amount, '%'))
+		$shop_panel/buff3.set_type(option_object.type)
 	if(option_object.type == "buff_single"):
 		$shop_panel/option_3_label.set_text(str("Improve Reward +", option_object.amount, '%'))
+		$shop_panel/buff3.set_type(option_object.type)
 	if(option_object.type == "delay_inevitable"):
 		$shop_panel/option_3_label.set_text(str("Upkeep -", option_object.amount, '%'))
+		$shop_panel/buff3.set_type(option_object.type)
 
 	$shop_panel/option_3_costs.set_text(str(option_object.cost))
 	option_3_object = option_object
@@ -86,27 +95,27 @@ func _ready():
 func handle_hover_highlight():
 	
 	if(shop_index == 0):
-		$shop_panel/option_1.visible = false
+		$shop_panel/option_1.visible = true
 		$shop_panel/option_1_selected.visible = true
-		$shop_panel/option_2.visible = true
+		$shop_panel/option_2.visible = false
 		$shop_panel/option_2_selected.visible = false
-		$shop_panel/option_3.visible = true
+		$shop_panel/option_3.visible = false
 		$shop_panel/option_3_selected.visible = false
 
 	if(shop_index == 1):
-		$shop_panel/option_1.visible = true
+		$shop_panel/option_1.visible = false
 		$shop_panel/option_1_selected.visible = false
-		$shop_panel/option_2.visible = false
+		$shop_panel/option_2.visible = true
 		$shop_panel/option_2_selected.visible = true
-		$shop_panel/option_3.visible = true
+		$shop_panel/option_3.visible = false
 		$shop_panel/option_3_selected.visible = false		
 
 	if(shop_index == 2):
-		$shop_panel/option_1.visible = true
+		$shop_panel/option_1.visible = false
 		$shop_panel/option_1_selected.visible = false
-		$shop_panel/option_2.visible = true
+		$shop_panel/option_2.visible = false
 		$shop_panel/option_2_selected.visible = false
-		$shop_panel/option_3.visible = false
+		$shop_panel/option_3.visible = true
 		$shop_panel/option_3_selected.visible = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
