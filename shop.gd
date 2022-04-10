@@ -91,6 +91,13 @@ func _ready():
 	
 	handle_hover_highlight()
 	pass # Replace with function body.
+	
+func get_help_text(type):
+	if type == "buff_global":
+		return "Increase slightly a percentage of payout for all times"
+	elif type == "buff_single":
+		return "Increase a large amount of payout for a random cash in option"
+	return "Instantly decreases the upkeep by a certain percentage"
 
 func handle_hover_highlight():
 	
@@ -101,6 +108,7 @@ func handle_hover_highlight():
 		$shop_panel/option_2_selected.visible = false
 		$shop_panel/option_3.visible = false
 		$shop_panel/option_3_selected.visible = false
+		$shop_panel/Help.set_text(get_help_text($shop_panel/buff.buff_type))
 
 	if(shop_index == 1):
 		$shop_panel/option_1.visible = false
@@ -109,6 +117,7 @@ func handle_hover_highlight():
 		$shop_panel/option_2_selected.visible = true
 		$shop_panel/option_3.visible = false
 		$shop_panel/option_3_selected.visible = false		
+		$shop_panel/Help.set_text(get_help_text($shop_panel/buff2.buff_type))
 
 	if(shop_index == 2):
 		$shop_panel/option_1.visible = false
@@ -117,6 +126,7 @@ func handle_hover_highlight():
 		$shop_panel/option_2_selected.visible = false
 		$shop_panel/option_3.visible = true
 		$shop_panel/option_3_selected.visible = true
+		$shop_panel/Help.set_text(get_help_text($shop_panel/buff3.buff_type))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
