@@ -80,7 +80,7 @@ func handle_dice_hover():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
+	$ost.play()
 	for i in 6:
 		var dice_instance = dice.instance()
 		dice_instance.dice_value = i + 1
