@@ -48,6 +48,8 @@ func toggle():
 		$selected.visible = false
 		$HoldLabel.visible = false
 
+	
+
 func _ready():
 	rng.randomize()
 	roll_dice()
