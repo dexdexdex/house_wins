@@ -75,6 +75,28 @@ func check_rule(dice_array):
 		else:
 			return false
 
+	if(rule_text == "ALL_TWOS"):
+		if(dice_array[0].dice_value == 2 &&
+			dice_array[1].dice_value == 2 &&
+			dice_array[2].dice_value == 2 &&
+			dice_array[3].dice_value == 2 &&
+			dice_array[4].dice_value == 2 &&
+			dice_array[5].dice_value == 2):
+				return true
+		else:
+			return false
+
+	if(rule_text == "ALL_ONES"):
+		if(dice_array[0].dice_value == 1 &&
+			dice_array[1].dice_value == 1 &&
+			dice_array[2].dice_value == 1 &&
+			dice_array[3].dice_value == 1 &&
+			dice_array[4].dice_value == 1 &&
+			dice_array[5].dice_value == 1):
+				return true
+		else:
+			return false
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if(hover == false):

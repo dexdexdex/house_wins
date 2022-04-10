@@ -182,6 +182,7 @@ func _process(delta):
 				shop_instance.shop_index = 0
 				shop_instance.handle_hover_highlight()
 				shop_instance.start_timer()
+				shop_instance.generate_options()
 				turns_until_shop = 3
 			else:
 				# do reroll!
