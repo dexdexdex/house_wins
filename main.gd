@@ -30,6 +30,7 @@ var input_ok
 var dice_select_mode = true
 var cash_in_mode = false
 
+var global_multiplier = 1.00
 
 
 var rng = RandomNumberGenerator.new()
