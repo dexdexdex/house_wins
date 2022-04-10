@@ -154,7 +154,8 @@ func _process(delta):
 			elif(cash_in_mode == true and cash_in_index < 3):
 				cash_in_index += 1
 				handle_cash_in_hover()
-			
+			if($ui_move.is_playing() == false):
+				$ui_move.play()			
 			input_ok = false
 
 		if(Input.is_action_pressed("ui_left") and input_ok == true):
@@ -164,7 +165,8 @@ func _process(delta):
 			elif(cash_in_mode == true and cash_in_index > 0):
 				cash_in_index -= 1
 				handle_cash_in_hover()
-			
+			if($ui_move.is_playing() == false):
+				$ui_move.play()		
 			input_ok = false
 
 		if(Input.is_action_pressed("ui_up") and input_ok == true):
@@ -172,7 +174,8 @@ func _process(delta):
 			dice_select_mode = false
 			handle_dice_hover()
 			handle_cash_in_hover()
-			
+			if($ui_move.is_playing() == false):
+				$ui_move.play()			
 			input_ok = false
 
 		if(Input.is_action_pressed("ui_down") and input_ok == true):
@@ -181,14 +184,16 @@ func _process(delta):
 			dice_position_index = 0
 			handle_dice_hover()
 			handle_cash_in_hover()
-		
+			if($ui_move.is_playing() == false):
+				$ui_move.play()			
 			input_ok = false
 
 		if(Input.is_action_pressed("ui_accept") and input_ok == true):
 			if game_over:
 				get_tree().reload_current_scene()
 			input_ok = false
-			if(dice_position_index < 6):
+			if(dice_position_index < 6 and dice_select_mode == true):
+				$ui_toggle.play()
 				dice_array[dice_position_index].toggle()
 				
 			elif(turns_until_shop == 0):
@@ -200,7 +205,7 @@ func _process(delta):
 				shop_instance.start_timer()
 				shop_instance.generate_options()
 				turns_until_shop = 3
-			else:
+			elif(dice_select_mode == true and dice_position_index == 6):
 				# do reroll!
 				reroll_dice()
 				turns_until_shop -= 1
@@ -222,7 +227,10 @@ func _process(delta):
 				else:
 					$shop_timer/shop_timer_label.set_text(str("SHOP: ", turns_until_shop, " TURNS"))	
 				pass
-
+			# maybe we tried to enter something but it was wrong
+			else:
+				$ui_error.play()
+				pass
 
 			if cash_in_mode:
 				# If matches constraint
