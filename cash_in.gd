@@ -20,8 +20,15 @@ func _ready():
 	pass # Replace with function body.
 
 func set_rule(rule_string):
-	$rule_label.set_text(str(rule_string))
 	rule_text = rule_string
+
+func set_label(rule_label_text):
+	rule_label_text = rule_label_text
+	$rule_label.set_text(str(rule_label_text))
+
+func set_reward(new_reward):
+	reward = new_reward
+	$reward_label.set_text(str(new_reward))
 
 func check_rule(dice_array):
 	if(rule_text == "ALL_SIXES"):

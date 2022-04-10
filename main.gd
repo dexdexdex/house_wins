@@ -79,23 +79,27 @@ func _ready():
 	# sorry this ist stupid at first
 	var cash_in_instance = cash_in.instance()
 	cash_in_instance.set_rule("ALL_SIXES")
+	cash_in_instance.set_label("All sixes")
 	cash_in_instance.position = Vector2(100, 50)
-	cash_in_instance.reward = rng.randi_range(400, 600)
+	cash_in_instance.set_reward(rng.randi_range(400, 600))
 	
 	var cash_in_instance_2 = cash_in.instance()
 	cash_in_instance_2.set_rule("ALL_FIVES")
+	cash_in_instance_2.set_label("All fives")
 	cash_in_instance_2.position = Vector2(200, 50)
-	cash_in_instance_2.reward = rng.randi_range(400, 600)
+	cash_in_instance_2.set_reward(rng.randi_range(400, 600))
 	
 	var cash_in_instance_3 = cash_in.instance()
 	cash_in_instance_3.set_rule("ALL_FOURS")
+	cash_in_instance_3.set_label("All fours")
 	cash_in_instance_3.position = Vector2(300, 50)
-	cash_in_instance_3.reward = rng.randi_range(400, 600)
+	cash_in_instance_3.set_reward(rng.randi_range(400, 600))
 	
 	var cash_in_instance_4 = cash_in.instance()
 	cash_in_instance_4.set_rule("ALL_THREES")	
+	cash_in_instance_4.set_label("All threes")
 	cash_in_instance_4.position = Vector2(400, 50)
-	cash_in_instance_4.reward = rng.randi_range(400, 600)
+	cash_in_instance_4.set_reward(rng.randi_range(400, 600))
 	
 	
 	add_child(cash_in_instance)
