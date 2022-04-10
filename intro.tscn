@@ -1,0 +1,81 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://pirulen.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="DynamicFont" id=1]
+size = 55
+font_data = ExtResource( 2 )
+
+[node name="fair_dice_intro" type="Node2D"]
+
+[node name="Panel" type="Panel" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+custom_styles/panel = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="fair_dice_intro" type="Label" parent="."]
+margin_left = 189.0
+margin_top = 192.0
+margin_right = 793.0
+margin_bottom = 253.0
+custom_fonts/font = SubResource( 1 )
+text = "FAIR DICE GAME"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="intro_1" type="Label" parent="."]
+margin_left = 197.0
+margin_top = 272.0
+margin_right = 348.0
+margin_bottom = 286.0
+text = "Winning is Temporary, Losing is Inevitable. Money is not forever."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="intro_2" type="Label" parent="."]
+margin_left = 197.0
+margin_top = 341.0
+margin_right = 504.0
+margin_bottom = 355.0
+text = "(Up Down Left Right) to select, SPACE to confirm"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="intro_3" type="Label" parent="."]
+margin_left = 197.0
+margin_top = 364.0
+margin_right = 823.0
+margin_bottom = 378.0
+text = "Select dice to HOLD. Once you've assembled a trick, press UP to  highlight and space to earn money!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="intro_4" type="Label" parent="."]
+margin_left = 197.0
+margin_top = 386.0
+margin_right = 823.0
+margin_bottom = 400.0
+text = "Every 3 turns the shop will come up! Buy an upgrade to try to help you survive!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="start" type="Label" parent="."]
+margin_left = 197.0
+margin_top = 432.0
+margin_right = 427.0
+margin_bottom = 446.0
+text = "Press Any Key to Start!"
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -9,6 +9,7 @@ export(PackedScene) var dice
 export(PackedScene) var cash_in
 export(PackedScene) var game_over_scene
 export(PackedScene) var shop
+export(PackedScene) var intro_scene
 
 # dice position index is current position of your cursor, goes from 1-6
 var dice_position_index = 0
@@ -36,6 +37,7 @@ var game_over = false
 
 var global_multiplier = 1.00
 
+var in_intro = true
 
 
 var rng = RandomNumberGenerator.new()
@@ -44,6 +46,8 @@ var turns_until_shop = 3
 var in_shop = false
 
 var shop_instance
+
+var intro_instance
 
 func reroll_dice():
 	$dice_roll.play()
@@ -136,121 +140,129 @@ func _ready():
 	shop_instance = shop.instance()
 	add_child(shop_instance)
 	
+	intro_instance = intro_scene.instance()
+	add_child(intro_instance)
+	
 	pass # Replace with function body.
 
+func _input(event):
+	if event is InputEventKey and event.pressed:
+		in_intro = false
+		intro_instance.visible = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 
-	$global_multiplier/multiplier_text.set_text(str("GLOBAL: ", int(global_multiplier*100), "%"))
-	$turn_counter/turn_label.set_text(str("TURN ", turn_count))
+	if(in_intro == false):
+		$global_multiplier/multiplier_text.set_text(str("GLOBAL: ", int(global_multiplier*100), "%"))
+		$turn_counter/turn_label.set_text(str("TURN ", turn_count))
 
-	# if shop is active we need to handle all the shop inputs instead of the inputs here
-	if(in_shop == false):
-		if(Input.is_action_pressed("ui_right") and input_ok == true):
-			if(dice_select_mode == true and dice_position_index < 6):
-				dice_position_index += 1
+		# if shop is active we need to handle all the shop inputs instead of the inputs here
+		if(in_shop == false):
+			if(Input.is_action_pressed("ui_right") and input_ok == true):
+				if(dice_select_mode == true and dice_position_index < 6):
+					dice_position_index += 1
+					handle_dice_hover()
+				elif(cash_in_mode == true and cash_in_index < 3):
+					cash_in_index += 1
+					handle_cash_in_hover()
+				if($ui_move.is_playing() == false):
+					$ui_move.play()			
+				input_ok = false
+
+			if(Input.is_action_pressed("ui_left") and input_ok == true):
+				if(dice_select_mode == true and dice_position_index > 0):
+					dice_position_index -= 1
+					handle_dice_hover()
+				elif(cash_in_mode == true and cash_in_index > 0):
+					cash_in_index -= 1
+					handle_cash_in_hover()
+				if($ui_move.is_playing() == false):
+					$ui_move.play()		
+				input_ok = false
+
+			if(Input.is_action_pressed("ui_up") and input_ok == true):
+				cash_in_mode = true
+				dice_select_mode = false
 				handle_dice_hover()
-			elif(cash_in_mode == true and cash_in_index < 3):
-				cash_in_index += 1
 				handle_cash_in_hover()
-			if($ui_move.is_playing() == false):
-				$ui_move.play()			
-			input_ok = false
+				if($ui_move.is_playing() == false):
+					$ui_move.play()			
+				input_ok = false
 
-		if(Input.is_action_pressed("ui_left") and input_ok == true):
-			if(dice_select_mode == true and dice_position_index > 0):
-				dice_position_index -= 1
+			if(Input.is_action_pressed("ui_down") and input_ok == true):
+				cash_in_mode = false
+				dice_select_mode = true
+				dice_position_index = 0
 				handle_dice_hover()
-			elif(cash_in_mode == true and cash_in_index > 0):
-				cash_in_index -= 1
 				handle_cash_in_hover()
-			if($ui_move.is_playing() == false):
-				$ui_move.play()		
-			input_ok = false
+				if($ui_move.is_playing() == false):
+					$ui_move.play()			
+				input_ok = false
 
-		if(Input.is_action_pressed("ui_up") and input_ok == true):
-			cash_in_mode = true
-			dice_select_mode = false
-			handle_dice_hover()
-			handle_cash_in_hover()
-			if($ui_move.is_playing() == false):
-				$ui_move.play()			
-			input_ok = false
-
-		if(Input.is_action_pressed("ui_down") and input_ok == true):
-			cash_in_mode = false
-			dice_select_mode = true
-			dice_position_index = 0
-			handle_dice_hover()
-			handle_cash_in_hover()
-			if($ui_move.is_playing() == false):
-				$ui_move.play()			
-			input_ok = false
-
-		if(Input.is_action_pressed("ui_accept") and input_ok == true):
-			if game_over:
-				get_tree().reload_current_scene()
-			input_ok = false
-			if(dice_position_index < 6 and dice_select_mode == true):
-				$ui_toggle.play()
-				dice_array[dice_position_index].toggle()
-				
-			elif(turns_until_shop == 0):
-				# show shop!
-				in_shop = true
-				shop_instance.visible = true
-				shop_instance.shop_index = 0
-				shop_instance.handle_hover_highlight()
-				shop_instance.start_timer()
-				shop_instance.generate_options()
-				turns_until_shop = 3
-			elif(dice_select_mode == true and dice_position_index == 6):
-				# do reroll!
-				reroll_dice()
-				turns_until_shop -= 1
-				upkeep = upkeep * 1.25
-				turn_count += 1
-				if current_funds > max_funds:
-					max_funds = current_funds
-				current_funds -= upkeep
-				if current_funds < 0:
-					game_over = true
-					$ost.stop()
-					$game_over.play()
-					var scene = game_over_scene.instance()
-					add_child(scene)
-					scene.set_text(turn_count, max_funds)
-				upkeep = stepify(upkeep * 1.25, 1)
-				$upkeep_panel/upkeep_text.set_text(str("UPKEEP: $", int(upkeep)))
-				$cash_panel/cash_text.set_text(str("FUNDS: $", int(current_funds)))
-				if(turns_until_shop == 0):
-					$shop_timer/shop_timer_label.set_text(str("SHOP: NEXT TURN!"))
-				else:
-					$shop_timer/shop_timer_label.set_text(str("SHOP: ", turns_until_shop, " TURNS"))	
-				pass
-			# maybe we tried to enter something but it was wrong
-			else:
-				$ui_error.play()
-				pass
-
-			if cash_in_mode:
-				# If matches constraint
-				if cash_in_array[cash_in_index].check_rule(dice_array):
-					current_funds += cash_in_array[cash_in_index].reward * global_multiplier
+			if(Input.is_action_pressed("ui_accept") and input_ok == true):
+				if game_over:
+					get_tree().reload_current_scene()
+				input_ok = false
+				if(dice_position_index < 6 and dice_select_mode == true):
+					$ui_toggle.play()
+					dice_array[dice_position_index].toggle()
 					
-					for i in 6:
-						if(dice_array[i].is_held == true):
-							dice_array[i].toggle()
+				elif(turns_until_shop == 0):
+					# show shop!
+					in_shop = true
+					shop_instance.visible = true
+					shop_instance.shop_index = 0
+					shop_instance.handle_hover_highlight()
+					shop_instance.start_timer()
+					shop_instance.generate_options()
+					turns_until_shop = 3
+				elif(dice_select_mode == true and dice_position_index == 6):
+					# do reroll!
 					reroll_dice()
+					turns_until_shop -= 1
+					upkeep = upkeep * 1.25
+					turn_count += 1
+					if current_funds > max_funds:
+						max_funds = current_funds
+					current_funds -= upkeep
+					if current_funds < 0:
+						game_over = true
+						$ost.stop()
+						$game_over.play()
+						var scene = game_over_scene.instance()
+						add_child(scene)
+						scene.set_text(turn_count, max_funds)
+					upkeep = stepify(upkeep * 1.25, 1)
+					$upkeep_panel/upkeep_text.set_text(str("UPKEEP: $", int(upkeep)))
 					$cash_panel/cash_text.set_text(str("FUNDS: $", int(current_funds)))
-					$ui_powerup.play()
-					cash_in_array[cash_in_index].change_rule()
-				return
+					if(turns_until_shop == 0):
+						$shop_timer/shop_timer_label.set_text(str("SHOP: NEXT TURN!"))
+					else:
+						$shop_timer/shop_timer_label.set_text(str("SHOP: ", turns_until_shop, " TURNS"))	
+					pass
+				# maybe we tried to enter something but it was wrong
+				else:
+					$ui_error.play()
+					pass
+
+				if cash_in_mode:
+					# If matches constraint
+					if cash_in_array[cash_in_index].check_rule(dice_array):
+						current_funds += cash_in_array[cash_in_index].reward * global_multiplier
+						
+						for i in 6:
+							if(dice_array[i].is_held == true):
+								dice_array[i].toggle()
+						reroll_dice()
+						$cash_panel/cash_text.set_text(str("FUNDS: $", int(current_funds)))
+						$ui_powerup.play()
+						cash_in_array[cash_in_index].change_rule()
+					return
+					
 				
-			
-	if(!(Input.is_action_pressed("ui_right")) and !(Input.is_action_pressed("ui_left")) and !(Input.is_action_pressed("ui_accept"))):
-		input_ok = true
+		if(!(Input.is_action_pressed("ui_right")) and !(Input.is_action_pressed("ui_left")) and !(Input.is_action_pressed("ui_accept"))):
+			input_ok = true
 			
 		
 		

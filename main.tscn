@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
 [ext_resource path="res://dice.tscn" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://fair_dice_game.wav" type="AudioStream" id=11]
 [ext_resource path="res://Collect 4.wav" type="AudioStream" id=12]
 [ext_resource path="res://lose-7.wav" type="AudioStream" id=13]
+[ext_resource path="res://intro.tscn" type="PackedScene" id=14]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 4 )
@@ -23,6 +24,7 @@ dice = ExtResource( 2 )
 cash_in = ExtResource( 3 )
 game_over_scene = ExtResource( 5 )
 shop = ExtResource( 6 )
+intro_scene = ExtResource( 14 )
 
 [node name="reroll_button" type="Panel" parent="."]
 margin_left = 727.0
